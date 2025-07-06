@@ -1,56 +1,62 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { playPause, setActiveSong } from '../redux/features/playerSlice';
-import PlayPause from './PlayPause';
+import { FaPlay, FaPause } from 'react-icons/fa';
 
-function SongCard({ song, isPlaying, activeSong, i, data }) {
+const SongCard = ({ song, i, data }) => {
   const dispatch = useDispatch();
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
 
-  const handlePauseClick = () => {
-    dispatch(playPause(false));
-  };
+  const title = song?.attributes?.name;
+  const artist = song?.attributes?.artistName;
+  const imageUrl = song?.attributes?.artwork?.url?.replace('{w}x{h}', '400x400');
 
   const handlePlayClick = () => {
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   };
 
+  const handlePauseClick = () => {
+    dispatch(playPause(false));
+  };
+
+  const isActive = activeSong?.attributes?.name === title;
+
   return (
-    <div className={`flex flex-col w-[250px] p-4 rounded-lg cursor-pointer 
-      ${activeSong?.title === song.title ? 'bg-white/20' : 'bg-white/5'} 
-      backdrop-blur-sm animate-slideup`}>
-      
-      <div className='relative w-full h-56 group'>
-        <div className="absolute inset-0 bg-black bg-opacity-50 justify-center items-center hidden group-hover:flex">
-          <PlayPause 
-            isPlaying={isPlaying}
-            activeSong={activeSong}
-            song={song}
-            handlePause={handlePauseClick}
-            handlePlay={handlePlayClick}
-          />
-        </div>
-
+    <div className="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition relative group">
+      {/* Album Art with play button overlay */}
+      <div className="relative">
         <img
-          alt={song?.title || 'song image'}
-          src={song?.images?.coverart || 'https://via.placeholder.com/250'}
-          className='w-full h-full rounded-lg'
+          src={imageUrl || 'https://via.placeholder.com/400'}
+          alt={title || 'No Title'}
+          className="rounded w-full h-40 object-cover"
         />
+
+        {/* Play/Pause button - visible only on hover or if active */}
+        <div className={`absolute inset-0 flex items-center justify-center bg-black/50 rounded opacity-0 group-hover:opacity-100 transition`}>
+          {isActive && isPlaying ? (
+            <button
+              onClick={handlePauseClick}
+              className="bg-white text-black rounded-full p-3 hover:scale-110 transition"
+            >
+              <FaPause />
+            </button>
+          ) : (
+            <button
+              onClick={handlePlayClick}
+              className="bg-white text-black rounded-full p-3 hover:scale-110 transition"
+            >
+              <FaPlay />
+            </button>
+          )}
+        </div>
       </div>
 
-      <div className='mt-4 flex flex-col'>
-        <p className='text-lg font-semibold text-white truncate'>
-          <Link to={`/songs/${song?.key}`}>{song?.title}</Link>
-        </p>
-        <p className='text-sm text-gray-300 mt-1'>
-          <Link to={song?.artists?.[0]?.adamid ? `/artists/${song.artists[0].adamid}` : '/top-artists'}>
-            {song?.subtitle}
-          </Link>
-        </p>
-      </div>
+      {/* Song Info */}
+      <h3 className="mt-2 text-white font-semibold truncate">{title || 'Unknown Title'}</h3>
+      <p className="text-sm text-gray-300 truncate">{artist || 'Unknown Artist'}</p>
     </div>
   );
-}
+};
 
 export default SongCard;

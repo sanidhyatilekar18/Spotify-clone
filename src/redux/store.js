@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { shazamCoreApi } from '../services/shazamCore';
-import playerReducer from '../features/playerSlice';
+import { shazamCoreApi } from './services/shazamCore';
+import playerReducer from './features/playerSlice';
 
 const store = configureStore({
   reducer: {
@@ -8,7 +8,9 @@ const store = configureStore({
     player: playerReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(shazamCoreApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: false, // ✅ disable Redux dev warnings
+    }).concat(shazamCoreApi.middleware),
 });
 
 export default store;

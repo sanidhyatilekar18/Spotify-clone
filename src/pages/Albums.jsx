@@ -8,7 +8,6 @@ const Albums = () => {
   if (isFetching) return <p className="text-white text-lg px-4">Loading Albums...</p>;
   if (error) return <p className="text-red-500 px-4">Error fetching albums.</p>;
 
-  // Group songs by albumName
   const albumMap = new Map();
 
   data?.forEach((song) => {

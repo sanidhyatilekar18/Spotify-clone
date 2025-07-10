@@ -8,7 +8,6 @@ const TrendingNow = () => {
   if (isFetching) return <p className="text-white text-lg">Loading Trending Songs...</p>;
   if (error) return <p className="text-red-500">Error fetching trending songs.</p>;
 
-  // Sort by release date (most recent first)
   const sortedData = [...data].sort((a, b) => {
     const dateA = new Date(a?.attributes?.releaseDate || '2000-01-01');
     const dateB = new Date(b?.attributes?.releaseDate || '2000-01-01');

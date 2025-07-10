@@ -6,7 +6,6 @@ const AroundYou = () => {
   const [countryCode, setCountryCode] = useState(null);
   const [errorLocation, setErrorLocation] = useState(null);
 
-  // Step 1: Detect country from IP
   useEffect(() => {
     const fetchCountry = async () => {
       try {
@@ -15,14 +14,13 @@ const AroundYou = () => {
         setCountryCode(data.country_code);
       } catch (err) {
         setErrorLocation('Unable to detect location');
-        setCountryCode('US'); // fallback to US
+        setCountryCode('US');
       }
     };
 
     fetchCountry();
   }, []);
 
-  // Step 2: Fetch songs for the detected country
   const { data, isFetching, error } = useGetSongsByCountryQuery(countryCode);
 
   if (isFetching || !countryCode)

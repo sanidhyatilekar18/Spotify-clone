@@ -12,8 +12,11 @@ import { RiCloseLine } from 'react-icons/ri';
 const links = [
   { name: 'Discover', to: '/', icon: HiOutlineHome },
   { name: 'Top Charts', to: '/top-charts', icon: HiOutlineHashtag },
-  { name: 'Top Artists', to: '/top-artists', icon: HiOutlineUserGroup },
+  { name: 'Trending Now', to: '/trending-now', icon: HiOutlineUserGroup },
   { name: 'Around You', to: '/around-you', icon: HiOutlinePhotograph },
+  { name: 'Genres', to: '/genres', icon: HiOutlinePhotograph },
+  { name: 'Search', to: '/search', icon: HiOutlinePhotograph },
+  { name: 'Albums', to: '/albums', icon: HiOutlinePhotograph },
 ];
 
 const NavLinks = ({ handleClick }) => (
@@ -62,11 +65,10 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={`absolute top-0 h-screen w-2/3 bg-gradient-to-tl from-white/10 to-[#483D8B] backdrop-blur-lg z-10 p-6 md:hidden smooth-transition ${
+        className={`absolute top-0 h-screen w-2/3 bg-gradient-to-tl bg-[#191624] backdrop-blur-lg z-10 p-6 md:hidden smooth-transition ${
           mobileMenuOpen ? 'left-0' : '-left-full'
         }`}
       >
-        {/* Logo for mobile */}
         <h1 className="text-white text-2xl font-bold mb-6">🎵 Musicify</h1>
         <NavLinks handleClick={() => setMobileMenuOpen(false)} />
       </div>

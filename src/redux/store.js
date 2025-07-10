@@ -9,7 +9,7 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // ✅ disable Redux dev warnings
+      serializableCheck: false,
     }).concat(shazamCoreApi.middleware),
 });
 

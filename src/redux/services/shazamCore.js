@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// Base URL for the Shazam Core API
 const baseUrl = "https://shazam-core.p.rapidapi.com/v1/";
 
 export const shazamCoreApi = createApi({
@@ -25,8 +24,25 @@ export const shazamCoreApi = createApi({
   getSongsByCountry: builder.query({
   query: (countryCode) => `charts/country?country_code=${countryCode}`,
 }),
+getArtistDetails: builder.query({
+  query: (artistId) => `artists/details?artist_id=${artistId}`,
+}),
+getSongsByGenreAndCountry: builder.query({
+  query: ({ genre, country }) => ({
+    url: 'charts/genre-world',
+    params: {
+      genre_code: genre,
+      country_code: country,
+    },
+  }),
+}),
+ getSongsBySearch: builder.query({
+    query: (searchTerm) =>
+      `search/multi?search_type=SONGS_ARTISTS&query=${searchTerm}&offset=0`,
+  }),
+
 
   }),
 });
 
-export const { useGetTopChartsQuery, useGetArtistDetailsQuery, useGetSongsByCountryQuery } = shazamCoreApi;
+export const { useGetTopChartsQuery, useGetArtistDetailsQuery, useGetSongsByCountryQuery, useGetSongsByGenreAndCountryQuery, useGetSongsBySearchQuery } = shazamCoreApi;

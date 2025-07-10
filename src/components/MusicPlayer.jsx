@@ -41,7 +41,6 @@ const MusicPlayer = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-[#181818] h-[90px] px-6 py-3 flex items-center justify-between z-50 text-white">
       
-      {/* Left: Track Info */}
       <div className="flex items-center gap-4 w-1/4">
         <img
           src={activeSong?.attributes?.artwork?.url?.replace('{w}x{h}', '80x80') || 'https://via.placeholder.com/80'}
@@ -58,7 +57,6 @@ const MusicPlayer = () => {
         </div>
       </div>
 
-      {/* Center: Controls + Seekbar */}
       <div className="flex flex-col items-center w-2/5">
         <Controls
           isPlaying={isPlaying}
@@ -77,7 +75,6 @@ const MusicPlayer = () => {
         />
       </div>
 
-      {/* Right: Volume */}
       <div className="w-1/4 flex justify-end items-center">
         <VolumeBar volume={volume} setVolume={(val) => {
           setVolume(val);
@@ -85,7 +82,6 @@ const MusicPlayer = () => {
         }} />
       </div>
 
-      {/* Audio */}
       <audio
         ref={audioRef}
         src={currentAudio}

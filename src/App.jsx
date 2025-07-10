@@ -1,13 +1,18 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Discover from './pages/Discover';
-import Sidebar from './components/Sidebar'; // 👈 make sure you import your sidebar
+import Sidebar from './components/Sidebar'; 
 import MusicPlayer from './components/MusicPlayer';
 import TopCharts from './pages/TopCharts';
-import TopArtists from './pages/TopArtists';
+
 import AroundYou from './pages/AroundYou';
 import { useSelector } from 'react-redux';
 import './index.css'; 
+import TrendingNow from './pages/TrendingNow';
+import Genres from './pages/Genres';
+import Search from './pages/Search';
+import AlbumDetails from './pages/AlbumDetails';
+import Albums from './pages/Albums';
 
 function App() {
   const { activeSong } = useSelector((state) => state.player);
@@ -22,9 +27,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Discover />} />
           <Route path="/top-charts" element={<TopCharts />} />
-          <Route path="/top-artists" element={<TopArtists />} />
+          <Route path='/trending-now' element={<TrendingNow />} />
           <Route path="/around-you" element={<AroundYou />} />
-
+          <Route path ="/genres" element={<Genres />} />
+          <Route path="/search/:searchTerm" element={<Search />} />
+          <Route path="/albums" element={<Albums />} />
+          <Route path="/albums/:albumName" element={<AlbumDetails />} />
         </Routes>
       </div>
 

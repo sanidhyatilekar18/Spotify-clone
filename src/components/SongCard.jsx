@@ -23,28 +23,25 @@ const SongCard = ({ song, i, data }) => {
   const isActive = activeSong?.attributes?.name === title;
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition relative group">
-      {/* Album Art with play button overlay */}
-      <div className="relative">
+    <div className="w-[200px] h-[300px] bg-gray-800 rounded-lg p-3 hover:bg-gray-700 transition flex flex-col justify-between group">
+      <div className="relative w-full h-[180px]">
         <img
           src={imageUrl || 'https://via.placeholder.com/400'}
           alt={title || 'No Title'}
-          className="rounded w-full h-40 object-cover"
+          className="w-full h-full object-cover rounded-lg"
         />
-
-        {/* Play/Pause button - visible only on hover or if active */}
-        <div className={`absolute inset-0 flex items-center justify-center bg-black/50 rounded opacity-0 group-hover:opacity-100 transition`}>
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-lg opacity-0 group-hover:opacity-100 transition">
           {isActive && isPlaying ? (
             <button
               onClick={handlePauseClick}
-              className="bg-white text-black rounded-full p-3 hover:scale-110 transition"
+              className="bg-white text-black rounded-full p-2 hover:scale-110 transition"
             >
               <FaPause />
             </button>
           ) : (
             <button
               onClick={handlePlayClick}
-              className="bg-white text-black rounded-full p-3 hover:scale-110 transition"
+              className="bg-white text-black rounded-full p-2 hover:scale-110 transition"
             >
               <FaPlay />
             </button>
@@ -52,9 +49,10 @@ const SongCard = ({ song, i, data }) => {
         </div>
       </div>
 
-      {/* Song Info */}
-      <h3 className="mt-2 text-white font-semibold truncate">{title || 'Unknown Title'}</h3>
-      <p className="text-sm text-gray-300 truncate">{artist || 'Unknown Artist'}</p>
+      <div className="mt-3 h-[60px] flex flex-col justify-between">
+        <h3 className="text-white font-semibold text-sm truncate">{title || 'Unknown Title'}</h3>
+        <p className="text-gray-400 text-xs truncate">{artist || 'Unknown Artist'}</p>
+      </div>
     </div>
   );
 };

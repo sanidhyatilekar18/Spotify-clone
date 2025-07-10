@@ -10,7 +10,6 @@ const TopCharts = () => {
   if (isFetching) return <p className="text-white px-4">Loading top charts...</p>;
   if (error) return <p className="text-red-500 px-4">Failed to load top charts</p>;
 
-  // Limit to top 10 songs
   const topSongs = data?.slice(0, 10) || [];
 
   return (

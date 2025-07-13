@@ -8,15 +8,17 @@ import {
   HiOutlineMenu,
 } from 'react-icons/hi';
 import { RiCloseLine } from 'react-icons/ri';
-
+import { IoMdAlbums } from 'react-icons/io';
+import { HiSearch } from 'react-icons/hi';
+import { FaGlobe } from 'react-icons/fa';
 const links = [
   { name: 'Discover', to: '/', icon: HiOutlineHome },
   { name: 'Top Charts', to: '/top-charts', icon: HiOutlineHashtag },
   { name: 'Trending Now', to: '/trending-now', icon: HiOutlineUserGroup },
-  { name: 'Around You', to: '/around-you', icon: HiOutlinePhotograph },
+  { name: 'Around You', to: '/around-you', icon: FaGlobe },
   { name: 'Genres', to: '/genres', icon: HiOutlinePhotograph },
-  { name: 'Search', to: '/search', icon: HiOutlinePhotograph },
-  { name: 'Albums', to: '/albums', icon: HiOutlinePhotograph },
+  { name: 'Search', to: '/search', icon: HiSearch },
+  { name: 'Albums', to: '/albums', icon: IoMdAlbums },
 ];
 
 const NavLinks = ({ handleClick }) => (
